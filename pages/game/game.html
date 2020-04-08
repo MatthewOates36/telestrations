@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Telestrations</title>
+
+    <link rel="stylesheet" href="/assets/assets.css">
+    <link rel="stylesheet" href="game.css">
+</head>
+<body class="unselectable">
+    <div id="canvasHolder">
+        <div id="canvasWrapper">
+            <canvas id="canvas" width="300" height="300"></canvas>
+        </div>
+    </div>
+    <div id="controlPanel">
+        <button id="clearButton" class="stateButton">Clear</button>
+        <button id="eraseButton" class="stateButton">Erase</button>
+        <button id="undoButton" class="stateButton">Undo</button>
+        <button id="redoButton" class="stateButton">Redo</button>
+        <button id="doneButton" class="stateButton">Done</button>
+    </div>
+<!--    <div id="imageDisplay"></div>-->
+
+    <script src="/assets/jquery.min.js"></script>
+    <script src="/assets/scribble-area.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

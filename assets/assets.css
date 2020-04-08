@@ -1,0 +1,14 @@
+:root {
+    --danger-color: red;
+    --go-color: lime;
+    --canvas-background: lightskyblue;
+    --page-background: snow;
+    --state-button-color: grey;
+}
+
+.unselectable {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
