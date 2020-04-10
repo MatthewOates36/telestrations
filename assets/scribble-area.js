@@ -29,11 +29,14 @@ class ScribbleArea {
     }
 
     setImage(image) {
+        let previousDrawMode = this.drawMode
+        this.setDrawMode(DrawMode.DRAW)
         let state = new Image()
         state.src = image
 
         state.onload = () => {
             this.context.drawImage(state, 0, 0)
+            this.setDrawMode(previousDrawMode)
         }
     }
 
@@ -65,9 +68,7 @@ class ScribbleArea {
         this.stateIndex--
 
         if (this.stateIndex > -1) {
-            this.setDrawMode(DrawMode.DRAW)
             this.setImage(this.previousCanvasStates[this.stateIndex])
-            this.setDrawMode(this.drawMode)
         } else {
             this.stateIndex = -1
         }
@@ -78,9 +79,7 @@ class ScribbleArea {
 
         if (this.stateIndex < this.previousCanvasStates.length) {
             this.clearCanvas()
-            this.setDrawMode(DrawMode.DRAW)
             this.setImage(this.previousCanvasStates[this.stateIndex])
-            this.setDrawMode(this.drawMode)
         } else {
             this.stateIndex = this.previousCanvasStates.length - 1
         }
