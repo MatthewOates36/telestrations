@@ -7,7 +7,7 @@ const path = require('path')
 
 // Get Server IP address
 const os = require('os')
-const ip = (os.networkInterfaces().en0 ? os.networkInterfaces().en0 : os.networkInterfaces().eth0).filter(address => address.family === 'IPv4')[0].address
+const ip = (os.networkInterfaces().en0 ? os.networkInterfaces().en0 : os.networkInterfaces().eth0 ? os.networkInterfaces().eth0 : "localhost").filter(address => address.family === 'IPv4')[0].address
 const port = 80
 
 // Add static pages path
