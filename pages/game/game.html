@@ -4,24 +4,43 @@
     <meta charset="UTF-8">
     <title>Telestrations</title>
 
+    <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Overlock">
     <link rel="stylesheet" href="/assets/style.css">
     <link rel="stylesheet" href="game.css">
 </head>
 <body class="unselectable">
-    <div id="canvasHolder">
-        <div id="canvasWrapper">
-            <canvas id="canvas" width="300" height="300"></canvas>
+    <div id="wordGuessingPage">
+        <div id="wordGuessingInstructionsWrapper">
+         <h2 id="guessingWordInstructions">Guess what this is</h2>
+        </div>
+        <div id="imageToGuessFromWrapper">
+            <img src="initial-image.png" id="imageToGuessFrom">
+        </div>
+        <div id="guessedWordWrapper">
+            <input id="wordGuessInput">
+            <button id="doneButtonForGuessPage" class="stateButton">Done</button>
         </div>
     </div>
-    <div id="controlPanel">
-        <button id="clearButton" class="stateButton">Clear</button>
-        <button id="eraseButton" class="stateButton">Erase</button>
-        <button id="undoButton" class="stateButton">Undo</button>
-        <button id="redoButton" class="stateButton">Redo</button>
-        <button id="doneButton" class="stateButton">Done</button>
+    <div id="drawingPage">
+        <div id="wordToBeDrawnWrapper">
+            <h2 id="wordToBeDrawn">None</h2>
+        </div>
+        <div id="canvasHolder">
+            <div id="canvasWrapper">
+                <canvas id="canvas" width="300" height="300"></canvas>
+            </div>
+        </div>
+        <div id="controlPanel">
+            <button id="clearButton" class="stateButton">Clear</button>
+            <button id="eraseButton" class="stateButton">Erase</button>
+            <button id="undoButton" class="stateButton">Undo</button>
+            <button id="redoButton" class="stateButton">Redo</button>
+            <button id="doneButton" class="stateButton">Done</button>
+        </div>
     </div>
 <!--    <div id="imageDisplay"></div>-->
 
+    <script src="/socket.io/socket.io.js"></script>
     <script src="/assets/jquery.min.js"></script>
     <script src="/assets/scribble-area.js"></script>
     <script src="game.js"></script>

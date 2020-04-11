@@ -4,6 +4,27 @@ html, body {
     margin: 0;
     background: var(--page-background);
     font-size: 1.5vh;
+    width: 100%;
+    height: 100%;
+}
+
+#drawingPage {
+    display: none;
+}
+
+#wordToBeDrawnWrapper {
+    width: 100vw;
+    height: 6vmin;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#wordToBeDrawn{
+    font-size: 6vmin;
+    font-family: overlock, serif;
+    margin: 1vmin;
+    padding: 1vmin;
 }
 
 #canvasHolder {
@@ -16,10 +37,11 @@ html, body {
     background: var(--canvas-background);
     margin-left: auto;
     margin-right: auto;
-    max-width: 85vw;
-    width: 85vh;
-    max-height: 85vh;
-    height: 85vw;
+    margin-top: 3vh;
+    max-width: 75vw;
+    width: 75vh;
+    max-height: 70vh;
+    height: 70vw;
 }
 
 #canvas {
@@ -48,4 +70,65 @@ html, body {
     border-radius: 0.5em;
     padding: 0.5em;
     background: var(--state-button-color);
+}
+
+#wordGuessingPage {
+    display: block;
+}
+
+#guessingWordInstructions{
+    width: 100%;
+    height: 4vh;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    font-size: 6vmin;
+    font-family: overlock, serif;
+    margin: 1vmin;
+    padding: 0;
+}
+
+#imageToGuessFromWrapper {
+    background: var(--canvas-background);
+    margin-top: 6vmin;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 75vw;
+    width: 75vh;
+    max-height: 70vh;
+    height: 70vw;
+}
+
+#imageToGuessFrom {
+    width: 100%;
+    height: 100%;
+}
+
+#guessedWordWrapper{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 73vmin;
+    width: 73vmin;
+    height: 8vh;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#wordGuessInput{
+    background: var(--canvas-background);
+    font-family: overlock, serif;
+    font-size: 5vmin;
+    margin: 1vmin;
+    border-radius: 3vmin;
+    border-color: black;
+    padding: 1vmin;
+    width: 100%;
+    height: 100%;
+}
+
+#doneButtonForGuessPage {
+    background: var(--go-color);
+    height: auto;
+    width: auto;
 }
