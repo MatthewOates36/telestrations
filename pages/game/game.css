@@ -8,6 +8,23 @@ html, body {
     height: 100%;
 }
 
+#playerNameHolder{
+    background-color: gray;
+    border-color: black;
+    padding: 1vh 1vw;
+    border-radius: 2vmin;
+    margin: 1vmin;
+    height: 5vh;
+    position: absolute;
+    text-align: center;
+}
+
+#playerName{
+    margin: 0;
+    font-family: overlock, serif;
+    font-size: 4vmin;
+}
+
 #drawingPage {
     display: none;
 }
