@@ -1,6 +1,6 @@
 :root {
-    --danger-color: red;
-    --go-color: lime;
+    --danger-color: darkred;
+    --go-color: green;
     --canvas-background: lightskyblue;
     --page-background: snow;
     --state-button-color: grey;

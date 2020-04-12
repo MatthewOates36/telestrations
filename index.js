@@ -34,7 +34,6 @@ gameIO.on('connection', socket => {
         gameIO.emit('text', message)
     })
 
-
 })
 
 http.listen(port, () => {
