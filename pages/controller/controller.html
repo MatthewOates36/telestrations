@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Controller</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/pages/controller/controller.css">
+</head>
+
+<body>
+    <div id="grid">
+        <div id="players">
+            <h1>Kick Players</h1>
+            <ul id="players-list">
+            </ul>
+        </div>
+        <div id="controls">
+            <button id='start-game-btn'>Start Game</button>
+            <button id='pause-game-btn'>Pause Game</button>
+            <button id='next-question-btn'>Next Question</button>
+            <button id='reset-game-btn'>Reset Game</button>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/pages/controller/controller.js"></script>
+</body>
+
+</html>

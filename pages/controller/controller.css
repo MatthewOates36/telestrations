@@ -1,0 +1,70 @@
+:root {
+    --black: #262626;
+    --aqua: #BFDBF7;
+    --white: #FFF;
+}
+
+html, body {
+    margin: 0;
+}
+
+body {
+    background-color: var(--aqua);
+}
+
+* {
+    font-family: 'Roboto', sans-serif;
+    color: var(--black);
+}
+
+#grid {
+    margin: 1em;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: 0.5em;
+}
+
+#grid > div {
+    background-color: var(--white);
+    border: 1px solid var(--black);
+    border-radius: 1em;
+    padding: 0.5em;
+    text-align: center;
+}
+
+#controls {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1em;
+}
+
+#controls > button {
+    font-size: 2em;
+    border: none;
+    border-radius: 0.5em;
+    background-color: var(--aqua);
+    color: var(--black);
+    padding: 0.5em 0;
+}
+
+#players {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 0em;
+}
+
+#players > h1 {
+    font-size: 2.5em;
+    margin-bottom: 0;
+}
+
+#players-list {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+#players-list > li {
+    margin-bottom: 0.75em;
+    font-size: 2em;
+}
