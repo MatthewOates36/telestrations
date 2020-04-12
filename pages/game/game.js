@@ -122,19 +122,19 @@ function showLoadingPage() {
 function setRating(rating) {
     switch (rating) {
         case 1:
-            ratingStar1.style.backgroundImage = 'url("../../assets/images/star.png")'
-            ratingStar2.style.backgroundImage = 'url("../../assets/images/empty-star.png")'
-            ratingStar3.style.backgroundImage = 'url("../../assets/images/empty-star.png")'
+            ratingStar1.style.backgroundImage = 'url("/assets/images/star.png")'
+            ratingStar2.style.backgroundImage = 'url("/assets/images/empty-star.png")'
+            ratingStar3.style.backgroundImage = 'url("/assets/images/empty-star.png")'
             break
         case 2:
-            ratingStar1.style.backgroundImage = 'url("../../assets/images/star.png")'
-            ratingStar2.style.backgroundImage = 'url("../../assets/images/star.png")'
-            ratingStar3.style.backgroundImage = 'url("../../assets/images/empty-star.png")'
+            ratingStar1.style.backgroundImage = 'url("/assets/images/star.png")'
+            ratingStar2.style.backgroundImage = 'url("/assets/images/star.png")'
+            ratingStar3.style.backgroundImage = 'url("/assets/images/empty-star.png")'
             break
         case 3:
-            ratingStar1.style.backgroundImage = 'url("../../assets/images/star.png")'
-            ratingStar2.style.backgroundImage = 'url("../../assets/images/star.png")'
-            ratingStar3.style.backgroundImage = 'url("../../assets/images/star.png")'
+            ratingStar1.style.backgroundImage = 'url("/assets/images/star.png")'
+            ratingStar2.style.backgroundImage = 'url("/assets/images/star.png")'
+            ratingStar3.style.backgroundImage = 'url("/assets/images/star.png")'
             break
     }
 }
