@@ -8,6 +8,7 @@ let currentPage = -1;
 let drawingPage = document.getElementById("drawingPage")
 let wordGuessingPage = document.getElementById("wordGuessingPage")
 let playersTelestrationDisplayPage = document.getElementById("playersTelestrationDisplayPage")
+let loadingPage = document.getElementById("loadingPage")
 let guessedWordInputBox = document.getElementById("wordGuessInput")
 let imageToGuessFrom = document.getElementById("imageToGuessFrom")
 let wordToBeDrawn = document.getElementById("wordToBeDrawn")
@@ -93,6 +94,7 @@ function showDrawingPage() {
     drawingPage.style.display = "block"
     wordGuessingPage.style.display = "none"
     playersTelestrationDisplayPage.style.display = "none"
+    loadingPage.style.display = "none"
 
 }
 
@@ -100,30 +102,39 @@ function showWordGuessingPage() {
     drawingPage.style.display = "none"
     wordGuessingPage.style.display = "block"
     playersTelestrationDisplayPage.style.display = "none"
+    loadingPage.style.display = "none"
 }
 
 function showPlayersTelestrationDisplayPage() {
     drawingPage.style.display = "none"
     wordGuessingPage.style.display = "none"
     playersTelestrationDisplayPage.style.display = "block"
+    loadingPage.style.display = "none"
+}
+
+function showLoadingPage() {
+    drawingPage.style.display = "none"
+    wordGuessingPage.style.display = "none"
+    playersTelestrationDisplayPage.style.display = "none"
+    loadingPage.style.display = "inline-block"
 }
 
 function setRating(rating) {
     switch (rating) {
         case 1:
-            ratingStar1.style.backgroundImage = 'url("star.png")'
-            ratingStar2.style.backgroundImage = 'url("empty-star.png")'
-            ratingStar3.style.backgroundImage = 'url("empty-star.png")'
+            ratingStar1.style.backgroundImage = 'url("/assets/images/star.png")'
+            ratingStar2.style.backgroundImage = 'url("/assets/images/empty-star.png")'
+            ratingStar3.style.backgroundImage = 'url("/assets/images/empty-star.png")'
             break
         case 2:
-            ratingStar1.style.backgroundImage = 'url("star.png")'
-            ratingStar2.style.backgroundImage = 'url("star.png")'
-            ratingStar3.style.backgroundImage = 'url("empty-star.png")'
+            ratingStar1.style.backgroundImage = 'url("/assets/images/star.png")'
+            ratingStar2.style.backgroundImage = 'url("/assets/images/star.png")'
+            ratingStar3.style.backgroundImage = 'url("/assets/images/empty-star.png")'
             break
         case 3:
-            ratingStar1.style.backgroundImage = 'url("star.png")'
-            ratingStar2.style.backgroundImage = 'url("star.png")'
-            ratingStar3.style.backgroundImage = 'url("star.png")'
+            ratingStar1.style.backgroundImage = 'url("/assets/images/star.png")'
+            ratingStar2.style.backgroundImage = 'url("/assets/images/star.png")'
+            ratingStar3.style.backgroundImage = 'url("/assets/images/star.png")'
             break
     }
 }
