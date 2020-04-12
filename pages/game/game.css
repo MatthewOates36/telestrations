@@ -37,7 +37,7 @@ html, body {
     flex-direction: column;
 }
 
-#wordToBeDrawn{
+#wordToBeDrawn {
     font-size: 6vmin;
     font-family: overlock, serif;
     margin: 1vmin;
@@ -93,7 +93,7 @@ html, body {
     display: none;
 }
 
-#guessingWordInstructions{
+#guessingWordInstructions {
     width: 100%;
     height: 4vh;
     align-items: center;
@@ -121,7 +121,7 @@ html, body {
     height: 100%;
 }
 
-#guessedWordWrapper{
+#guessedWordWrapper {
     margin-left: auto;
     margin-right: auto;
     max-width: 73vmin;
@@ -132,7 +132,7 @@ html, body {
     flex-direction: column;
 }
 
-#wordGuessInput{
+#wordGuessInput {
     background: var(--canvas-background);
     font-family: overlock, serif;
     font-size: 5vmin;
@@ -150,7 +150,7 @@ html, body {
     width: auto;
 }
 
-#playersTelestrationDisplayPage{
+#playersTelestrationDisplayPage {
     width: 100%;
     height: 100%;
     display: flex;
@@ -172,7 +172,7 @@ html, body {
     font-size: 5vmin;
 }
 
-.telestrationsWord{
+.telestrationsWord {
     margin: 0;
 }
 
@@ -190,22 +190,22 @@ html, body {
     background: var(--canvas-background);
 }
 
-.telestrationsImage{
+.telestrationsImage {
     margin: 0;
     height: 100%;
     width: 100%;
 }
 
-#ratingWrapper{
+#ratingWrapper {
     text-align: center;
     width: 100%;
     height: 10vh;
 }
 
-.ratingStar{
+.ratingStar {
     background-image: url("empty-star.png");
-    background-position:center;
-    background-repeat:no-repeat;
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: 5vh;
     background-color: var(--page-background);
     width: 5vmax;
@@ -217,13 +217,13 @@ html, body {
     margin: 2.5vmin;
 }
 
-#doneButtonForTelestationPageWrapper{
+#doneButtonForTelestationPageWrapper {
     text-align: center;
     width: 100%;
     height: 8vh;
     margin: 2vh 0;
 }
 
-#doneButtonForTelestraionPage{
+#doneButtonForTelestraionPage {
     background: var(--go-color);
 }
