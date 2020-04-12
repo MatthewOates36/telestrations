@@ -8,6 +8,23 @@ html, body {
     height: 100%;
 }
 
+/*#playerNameHolder{*/
+/*    background-color: gray;*/
+/*    border-color: black;*/
+/*    padding: 1vh 1vw;*/
+/*    border-radius: 2vmin;*/
+/*    margin: 1vmin;*/
+/*    height: 5vh;*/
+/*    position: absolute;*/
+/*    text-align: center;*/
+/*}*/
+
+/*#playerName{*/
+/*    margin: 0;*/
+/*    font-family: overlock, serif;*/
+/*    font-size: 4vh;*/
+/*}*/
+
 #drawingPage {
     display: none;
 }
@@ -20,7 +37,7 @@ html, body {
     flex-direction: column;
 }
 
-#wordToBeDrawn{
+#wordToBeDrawn {
     font-size: 6vmin;
     font-family: overlock, serif;
     margin: 1vmin;
@@ -73,10 +90,10 @@ html, body {
 }
 
 #wordGuessingPage {
-    display: block;
+    display: none;
 }
 
-#guessingWordInstructions{
+#guessingWordInstructions {
     width: 100%;
     height: 4vh;
     align-items: center;
@@ -104,7 +121,7 @@ html, body {
     height: 100%;
 }
 
-#guessedWordWrapper{
+#guessedWordWrapper {
     margin-left: auto;
     margin-right: auto;
     max-width: 73vmin;
@@ -115,7 +132,7 @@ html, body {
     flex-direction: column;
 }
 
-#wordGuessInput{
+#wordGuessInput {
     background: var(--canvas-background);
     font-family: overlock, serif;
     font-size: 5vmin;
@@ -131,4 +148,82 @@ html, body {
     background: var(--go-color);
     height: auto;
     width: auto;
+}
+
+#playersTelestrationDisplayPage {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow: auto;
+    position: relative;
+
+}
+
+.telestrationsWordWrapper {
+    margin-top: 2vmin;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 75vw;
+    width: 75vh;
+    text-align: center;
+    font-family: overlock, serif;
+    font-size: 5vmin;
+}
+
+.telestrationsWord {
+    margin: 0;
+}
+
+.telestrationsImageWrapper {
+    margin-top: 2vmin;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 55vw;
+    width: 55vh;
+    max-height: 55vh;
+    height: 55vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: var(--canvas-background);
+}
+
+.telestrationsImage {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#ratingWrapper {
+    text-align: center;
+    width: 100%;
+    height: 10vh;
+}
+
+.ratingStar {
+    background-image: url("empty-star.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 5vh;
+    background-color: var(--page-background);
+    width: 5vmax;
+    height: 5vmax;
+    border-radius: 12vmin;
+    border: none;
+    align-items: center;
+    position: relative;
+    margin: 2.5vmin;
+}
+
+#doneButtonForTelestationPageWrapper {
+    text-align: center;
+    width: 100%;
+    height: 8vh;
+    margin: 2vh 0;
+}
+
+#doneButtonForTelestraionPage {
+    background: var(--go-color);
 }
