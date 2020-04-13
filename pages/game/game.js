@@ -64,6 +64,11 @@ $("#redoButton").on('click touchstart', (event) => {
     scribbleArea.redo()
 })
 
+socket.on('redirect', message => {
+    let data = JSON.parse(message)
+    window.location.href = "http://" + window.location.hostname + ":" + window.location.port + data.location
+})
+
 socket.on('image', message => {
     let data = JSON.parse(message)
     imageToGuessFrom.src = data.image

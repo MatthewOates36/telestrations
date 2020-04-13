@@ -53,7 +53,7 @@ class ScribbleArea {
 
     setDrawMode(drawMode) {
         this.drawMode = drawMode
-        if(this.drawMode === DrawMode.ERASE) {
+        if (this.drawMode === DrawMode.ERASE) {
             this.context.globalCompositeOperation = 'destination-out'
             this.context.lineWidth = 6
         } else {
@@ -86,8 +86,8 @@ class ScribbleArea {
     }
 
     press(event) {
-        if(!this.getValidTouch(event)) {
-           return
+        if (!this.getValidTouch(event)) {
+            return
         }
 
         if (this.getMouseInCanvas(event)) {
@@ -112,7 +112,7 @@ class ScribbleArea {
     }
 
     move(event) {
-        if(!this.getValidTouch(event)) {
+        if (!this.getValidTouch(event)) {
             this.release(event)
             return
         }
