@@ -68,7 +68,7 @@ loginIO.on('connection', socket => {
 
 gameIO.on('connection', socket => {
     userHandler.getUsers(users => {
-        let id = cookie.parse(socket.request.headers.cookie).id
+        let id = cookie.parse(socket.handshake.headers.cookie).id
 
         if(id === undefined || !users.includes(id)) {
             socket.emit('redirect', JSON.stringify({location: ''}))
