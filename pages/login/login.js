@@ -3,7 +3,7 @@ let socket = io('/login')
 socket.on('id', message => {
     let data = JSON.parse(message)
     document.cookie = `id=${data.id}`
-    window.location.href = "http://" + window.location.hostname + ":" + window.location.port + "/selector/" + msg
+    window.location.href = "http://" + window.location.hostname + ":" + window.location.port + "/game"
 })
 
 function submit() {
