@@ -9,12 +9,12 @@ class UserHandler {
 
     getUsers(callback) {
         fs.readFile(this.file, this.options, (err, data) => {
-            if(err) {
+            if (err) {
                 throw err
             }
-            if(callback) {
+            if (callback) {
                 let newData = callback(new Users(data))
-                if(newData !== undefined) {
+                if (newData !== undefined) {
                     this.setUsers(newData)
                 }
             }
@@ -25,21 +25,22 @@ class UserHandler {
         return new Users(fs.readFileSync(this.file, this.options))
     }
 
-    setUsers(users, callback = () => {}) {
-        if(callback !== undefined) {
-            fs.writeFile(this.file, users.toString(), this.options, callback)
+    setUsers(users, callback = () => {
+    }) {
+        if (callback !== undefined) {
+            fs.writeFile(this.file, users.toPrettyString(), this.options, callback)
         }
     }
 
     setUsersSync(users) {
-        fs.writeFileSync(this.file, users.toString(), this.options)
+        fs.writeFileSync(this.file, users.toPrettyString(), this.options)
     }
 }
 
 class Users {
 
     constructor(data) {
-        if(typeof data === 'object') {
+        if (typeof data === 'object') {
             this.data = data
         } else {
             this.data = JSON.parse(data)
@@ -47,7 +48,7 @@ class Users {
     }
 
     createUser(id, name) {
-        if(this.getUser(id) === undefined) {
+        if (this.getUser(id) === undefined) {
             this.setUser(id, {id: id, name: name, connected: false})
         }
     }
@@ -84,6 +85,10 @@ class Users {
 
     toJSON() {
         return this.data
+    }
+
+    toPrettyString() {
+        return JSON.stringify(this.toJSON(), null, 2)
     }
 
     toString() {

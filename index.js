@@ -93,6 +93,7 @@ gameIO.on('connection', socket => {
         console.log(data.text)
         gameIO.emit('text', message)
     })
+
 })
 
 http.listen(port, () => {
