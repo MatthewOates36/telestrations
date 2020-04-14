@@ -39,7 +39,6 @@ ratingStar3.addEventListener("click", () => {
     setRating(3)
 })
 
-
 canvas[0].addEventListener('touchmove', e => {
     if (e.touches.length === 1) {
         e.preventDefault()
@@ -76,6 +75,10 @@ $("#redoButton").on('click touchstart', (event) => {
 socket.on('redirect', message => {
     let data = JSON.parse(message)
     window.location.href = "http://" + window.location.hostname + ":" + window.location.port + data.location
+})
+
+socket.on('enter-initial', () => {
+    showInitial()
 })
 
 socket.on('image', message => {

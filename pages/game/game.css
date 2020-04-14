@@ -59,6 +59,7 @@ html, body {
     align-items: center;
     display: flex;
     flex-direction: column;
+    border: 0;
 }
 
 #wordGuessInput {
@@ -67,8 +68,7 @@ html, body {
     font-size: 5vmin;
     text-align: center;
     border-radius: 3vmin;
-    border-color: black;
-
+    border: 1px solid black;
     width: 100%;
     height: 100%;
 }
@@ -226,11 +226,13 @@ html, body {
 #loader {
     display: block;
     position: absolute;
-    left: 43%;
-    top: 43%;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     width: 300px;
     height: 300px;
-    margin: -75px 0 0 -75px;
     border-radius: 50%;
     border: 8px solid transparent;
     border-top-color: rebeccapurple;

@@ -53,6 +53,15 @@ class Users {
         }
     }
 
+    getUserID(name) {
+        for(let id of Object.keys(this.data)) {
+            if(this.getUserProperty(id, 'name') === name) {
+                return id
+            }
+        }
+        return undefined
+    }
+
     includes(id) {
         return this.getUser(id) !== undefined
     }
@@ -75,8 +84,12 @@ class Users {
         this.getUser(user)
     }
 
+    getUsers() {
+        return this.data
+    }
+
     getUser(id) {
-        return this.data[id]
+        return this.getUsers()[id]
     }
 
     setUser(id, data) {
