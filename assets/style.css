@@ -1,9 +1,9 @@
 :root {
-    --danger-color: darkred;
-    --go-color: green;
-    --canvas-background: lightskyblue;
-    --page-background: snow;
-    --state-button-color: grey;
+    --danger-color: #FE2712;
+    --go-color: #66B032;
+    --canvas-background: #b3deef;
+    --page-background: #fffbf7;
+    --state-button-color: #c1c1c1;
 }
 
 .unselectable {
