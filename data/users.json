@@ -18,5 +18,10 @@
     "id": "::ffff:127.0.0.1e05wesyg78s",
     "name": "hjb",
     "connected": true
+  },
+  "::ffff:10.19.12.1726d1npir9xeb": {
+    "id": "::ffff:10.19.12.1726d1npir9xeb",
+    "name": "jase",
+    "connected": true
   }
 }

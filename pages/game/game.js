@@ -5,9 +5,15 @@ const scribbleArea = new ScribbleArea(canvas)
 let drawMode = DrawMode.DRAW
 let currentPage = -1;
 
-let drawingPage = document.getElementById("drawingPage")
-let wordGuessingPage = document.getElementById("wordGuessingPage")
-let playersTelestrationDisplayPage = document.getElementById("playersTelestrationDisplayPage")
+let imageToGuessFromSection = document.getElementById("imageToGuessFromSection")
+let guessedWordSection = document.getElementById("guessedWordSection")
+let canvasSection = document.getElementById("canvasSection")
+let telestrationDisplaySection = document.getElementById("telestrationDisplaySection")
+let wordToBeDrawnSection = document.getElementById("wordToBeDrawnSection")
+let ratingSection = document.getElementById("ratingSection")
+let wordGuessPageDoneButton = document.getElementById("wordGuessPageDoneButton")
+let wordGuessInput = document.getElementById("wordGuessInput")
+
 let loadingPage = document.getElementById("loadingPage")
 let guessedWordInputBox = document.getElementById("wordGuessInput")
 let imageToGuessFrom = document.getElementById("imageToGuessFrom")
@@ -16,10 +22,13 @@ let ratingStar1 = document.getElementById("ratingStar1")
 let ratingStar2 = document.getElementById("ratingStar2")
 let ratingStar3 = document.getElementById("ratingStar3")
 
-showWordGuessingPage()
+showInitialPage()
 
-document.getElementById("doneButton").addEventListener("click", continueToNextPage)
-document.getElementById("doneButtonForGuessPage").addEventListener("click", continueToNextPage)
+$('.doneButton').each((index, item) => {
+    console.log(item)
+    item.addEventListener("click", continueToNextPage)
+})
+
 ratingStar1.addEventListener("click", () => {
     setRating(1)
 })
@@ -95,33 +104,60 @@ function continueToNextPage() {
     }
 }
 
+function showInitialPage(){
+    imageToGuessFromSection.style.display = "none"
+    guessedWordSection.style.display = "block"
+    wordToBeDrawnSection.style.display = "none"
+    canvasSection.style.display = "block"
+    telestrationDisplaySection.style.display = "none"
+    ratingSection.style.display = "none"
+    loadingPage.style.display = "none"
+    wordGuessPageDoneButton.style.display = "none"
+    wordGuessInput.placeholder = "Choose a word to draw"
+
+}
+
 function showDrawingPage() {
-    drawingPage.style.display = "block"
-    wordGuessingPage.style.display = "none"
-    playersTelestrationDisplayPage.style.display = "none"
+    imageToGuessFromSection.style.display = "none"
+    guessedWordSection.style.display = "none"
+    wordToBeDrawnSection.style.display = "block"
+    canvasSection.style.display = "block"
+    telestrationDisplaySection.style.display = "none"
+    ratingSection.style.display = "none"
     loadingPage.style.display = "none"
 
 }
 
 function showWordGuessingPage() {
-    drawingPage.style.display = "none"
-    wordGuessingPage.style.display = "block"
-    playersTelestrationDisplayPage.style.display = "none"
+    imageToGuessFromSection.style.display = "block"
+    guessedWordSection.style.display = "block"
+    wordToBeDrawnSection.style.display = "none"
+    canvasSection.style.display = "none"
+    telestrationDisplaySection.style.display = "none"
+    ratingSection.style.display = "none"
     loadingPage.style.display = "none"
+    wordGuessInput.placeholder = "Guess what this is"
+    wordGuessPageDoneButton.style.display = "block"
 }
 
 function showPlayersTelestrationDisplayPage() {
-    drawingPage.style.display = "none"
-    wordGuessingPage.style.display = "none"
-    playersTelestrationDisplayPage.style.display = "block"
+    imageToGuessFromSection.style.display = "none"
+    guessedWordSection.style.display = "none"
+    wordToBeDrawnSection.style.display = "none"
+    canvasSection.style.display = "none"
+    telestrationDisplaySection.style.display = "block"
+    ratingSection.style.display = "block"
     loadingPage.style.display = "none"
 }
 
 function showLoadingPage() {
-    drawingPage.style.display = "none"
-    wordGuessingPage.style.display = "none"
-    playersTelestrationDisplayPage.style.display = "none"
-    loadingPage.style.display = "inline-block"
+    imageToGuessFromSection.style.display = "none"
+    guessedWordSection.style.display = "none"
+    wordToBeDrawnSection.style.display = "none"
+    canvasSection.style.display = "none"
+    telestrationDisplaySection.style.display = "none"
+    ratingSection.style.display = "none"
+    loadingPage.style.display = "block"
 }
 
 function setRating(rating) {
