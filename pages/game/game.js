@@ -16,7 +16,7 @@ let ratingStar1 = document.getElementById("ratingStar1")
 let ratingStar2 = document.getElementById("ratingStar2")
 let ratingStar3 = document.getElementById("ratingStar3")
 
-showWordGuessingPage()
+showLoadingPage()
 
 document.getElementById("doneButton").addEventListener("click", continueToNextPage)
 document.getElementById("doneButtonForGuessPage").addEventListener("click", continueToNextPage)
@@ -29,7 +29,6 @@ ratingStar2.addEventListener("click", () => {
 ratingStar3.addEventListener("click", () => {
     setRating(3)
 })
-
 
 canvas[0].addEventListener('touchmove', e => {
     if (e.touches.length === 1) {
@@ -69,6 +68,10 @@ socket.on('redirect', message => {
     window.location.href = "http://" + window.location.hostname + ":" + window.location.port + data.location
 })
 
+socket.on('enter-initial', () => {
+    showInitial()
+})
+
 socket.on('image', message => {
     let data = JSON.parse(message)
     imageToGuessFrom.src = data.image
@@ -93,6 +96,13 @@ function continueToNextPage() {
         socket.emit('image', JSON.stringify({image: scribbleArea.getImage()}))
         console.log(scribbleArea.getImage())
     }
+}
+
+function showInitial() {
+    drawingPage.style.display = "block"
+    wordGuessingPage.style.display = "block"
+    playersTelestrationDisplayPage.style.display = "none"
+    loadingPage.style.display = "none"
 }
 
 function showDrawingPage() {

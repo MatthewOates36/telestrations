@@ -6,7 +6,9 @@ const io = require('socket.io')(http)
 const fs = require('fs')
 const path = require('path')
 const {UserHandler, Users} = require('./assets/users.js')
+const {TelestrationsHandler, Telestrations, Telestration, TelestrationState, TelestrationSectionType} = require('./assets/telestrations.js')
 
+const controllerIO = io.of('/controller')
 const loginIO = io.of('/login')
 const gameIO = io.of('/game')
 
@@ -15,12 +17,29 @@ const ip = require('ip').address()
 const port = 80
 
 const userHandler = new UserHandler(__dirname + '/data/users.json')
+const telestrationsHandler = new TelestrationsHandler(__dirname + '/data/gamedata.json')
+
+const GameMode = {
+    PAUSED: 0,
+    INITIAL: 1,
+    TELESTRATING: 2,
+    RATING: 3,
+    SHOWING_BEST: 4
+}
+
+let currentGameMode = GameMode.PAUSED
+let lastGameMode = GameMode.PAUSED
 
 // Add static pages path
 app.use('/pages', express.static(path.join(__dirname, 'pages')))
 
 // Add static assets path
 app.use('/assets', express.static(path.join(__dirname, 'assets')))
+
+app.get('/controller', (req, res) => {
+    res.writeHead(307, {Location: '/pages/controller/controller.html'})
+    res.end()
+});
 
 app.get('/', (req, res) => {
     res.writeHead(307, {Location: '/pages/login/login.html'})
@@ -32,8 +51,33 @@ app.get('/game', (req, res) => {
     res.end()
 })
 
-loginIO.on('connection', socket => {
+controllerIO.on('connection', socket => {
+    socket.on('start-game', () => {
+        if (currentGameMode === GameMode.PAUSED) {
+            currentGameMode = GameMode.INITIAL
+        }
+    })
 
+    socket.on('pause-game', () => {
+        currentGameMode = GameMode.PAUSED
+    })
+
+    socket.on('reset-game', () => {
+
+    })
+
+    socket.on('remove-player', message => {
+        let data = JSON.parse(message)
+
+        userHandler.getUsers(users => {
+            users.userDisconnected(users.getUserID(data.name))
+
+            return users
+        })
+    })
+})
+
+loginIO.on('connection', socket => {
     socket.on('name', message => {
         let data = JSON.parse(message)
 
@@ -41,9 +85,8 @@ loginIO.on('connection', socket => {
             let cookies = undefined
             try {
                 cookies = cookie.parse(socket.request.headers.cookie)
-            } catch (e) {
+            } catch (e) {}
 
-            }
             let id = ''
             if (cookies === undefined || cookies.id === undefined) {
                 do {
@@ -67,9 +110,16 @@ loginIO.on('connection', socket => {
 })
 
 gameIO.on('connection', socket => {
-    userHandler.getUsers(users => {
-        let id = cookie.parse(socket.handshake.headers.cookie).id
 
+    let id = undefined
+
+    try {
+        id = cookie.parse(socket.handshake.headers.cookie).id
+    } catch (e) {
+
+    }
+
+    userHandler.getUsers(users => {
         if(id === undefined || !users.includes(id)) {
             socket.emit('redirect', JSON.stringify({location: ''}))
             return
@@ -94,7 +144,58 @@ gameIO.on('connection', socket => {
         gameIO.emit('text', message)
     })
 
+    socket.on('disconnect', () => {
+        userHandler.getUsers(users => {
+            if(id !== undefined) {
+                users.userDisconnected(id)
+            }
+            return users
+        })
+    })
 })
+
+function sendPlayerList() {
+    userHandler.getUsers(users => {
+        let players = {}
+
+        for(let user of Object.keys(users.getUsers())) {
+            if(users.getUserProperty(user, 'connected')) {
+                players[users.getUserProperty(user, 'name')] = true
+            }
+        }
+
+        controllerIO.emit('players-list', JSON.stringify({players: players}))
+    })
+}
+
+setInterval(() => {
+    let nextGameMode = currentGameMode
+
+    sendPlayerList()
+
+    switch (currentGameMode) {
+        case GameMode.PAUSED:
+            break
+        case GameMode.INITIAL:
+            if(lastGameMode !== GameMode.INITIAL) {
+                telestrationsHandler.getTelestraions(telestrations => {
+                    telestrations.clearTelestrations()
+                    gameIO.emit('enter-initial')
+                    return telestrations
+                })
+            }
+            break
+        case GameMode.TELESTRATING:
+            break
+        case GameMode.RATING:
+            break
+        case GameMode.SHOWING_BEST:
+            break
+    }
+
+    lastGameMode = currentGameMode
+    currentGameMode = nextGameMode
+}, 100)
 
 http.listen(port, () => {
     console.log(`Listening on http://${ip}:${port}`)

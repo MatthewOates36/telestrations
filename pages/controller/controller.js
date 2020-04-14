@@ -32,5 +32,7 @@ nextQuestionButton.addEventListener('click', () => {
 
 const resetGameButton = document.getElementById('reset-game-btn')
 resetGameButton.addEventListener('click', () => {
-    socket.emit('reset-game')
+    if(confirm('Are you sure you want to reset the game?')) {
+        socket.emit('reset-game')
+    }
 })
