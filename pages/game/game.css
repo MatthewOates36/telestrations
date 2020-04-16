@@ -3,32 +3,97 @@ html, body {
     position: fixed;
     margin: 0;
     background: var(--page-background);
-    font-size: 1.5vh;
+    font-size: 1.5vmin;
     width: 100%;
     height: 100%;
 }
 
-/*#playerNameHolder{*/
-/*    background-color: gray;*/
-/*    border-color: black;*/
-/*    padding: 1vh 1vw;*/
-/*    border-radius: 2vmin;*/
-/*    margin: 1vmin;*/
-/*    height: 5vh;*/
-/*    position: absolute;*/
-/*    text-align: center;*/
-/*}*/
-
-/*#playerName{*/
-/*    margin: 0;*/
-/*    font-family: overlock, serif;*/
-/*    font-size: 4vh;*/
-/*}*/
-
-#drawingPage {
-    display: none;
+.stateButton {
+    display: block;
+    width: auto;
+    height: auto;
+    font-size: 2em;
+    border: 0;
+    margin: 0;
+    padding: 0.5em;
+    background: var(--state-button-color);
+    color: var(--default-text);
 }
 
+.leftButton {
+    border-radius: 1rem 0 0 1rem;
+}
+
+.rightButton {
+    border-radius: 0 1rem 1rem 0;
+}
+
+.roundedButton {
+    border-radius: 1rem;
+}
+
+/*wordGuessingInstructionsSection*/
+#guessingWordInstructions {
+    width: 100%;
+    height: 4vh;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    font-size: 6vmin;
+    font-family: overlock, serif;
+    margin: 1vmin;
+    padding: 0;
+}
+
+
+/*imageToGuessFromSection*/
+#imageToGuessFromSection {
+    background: var(--canvas-background);
+    margin-top: 6vmin;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 75vw;
+    width: 75vh;
+    max-height: 70vh;
+    height: 70vw;
+    text-align: center;
+    border-radius: 1rem;
+    border: 1px solid black;
+    overflow: hidden;
+}
+
+#imageToGuessFrom {
+    width: 100%;
+    height: 100%;
+}
+
+
+/*guessedWordSection*/
+#guessedWordSection {
+    margin: 1vh auto;
+    max-width: 75vw;
+    width: 75vh;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    border: 0;
+}
+
+#wordGuessInput {
+    background: var(--canvas-background);
+    font-family: overlock, serif;
+    font-size: 5vmin;
+    text-align: center;
+    border-radius: 1rem;
+    border: 1px solid black;
+    margin: 0;
+    padding: 0.25em 0 0.25em 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+/*wordToBeDrawnSection*/
 #wordToBeDrawnWrapper {
     width: 100vw;
     height: 6vmin;
@@ -44,6 +109,8 @@ html, body {
     padding: 1vmin;
 }
 
+
+/*canvasSection*/
 #canvasHolder {
     width: 100vw;
     text-align: center;
@@ -59,6 +126,9 @@ html, body {
     width: 75vh;
     max-height: 70vh;
     height: 70vw;
+    overflow: hidden;
+    border-radius: 1rem;
+    border: 1px solid black;
 }
 
 #canvas {
@@ -67,90 +137,20 @@ html, body {
 }
 
 #controlPanel {
-    text-align: center;
     padding: 2.5vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 #clearButton {
     background: var(--danger-color);
 }
 
-#doneButton {
-    background: var(--go-color);
-}
 
-.stateButton {
-    width: auto;
-    height: auto;
-    font-size: 2em;
-    border: 0;
-    border-radius: 0.5em;
-    padding: 0.5em;
-    background: var(--state-button-color);
-}
-
-#wordGuessingPage {
-    display: none;
-}
-
-#guessingWordInstructions {
-    width: 100%;
-    height: 4vh;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    font-size: 6vmin;
-    font-family: overlock, serif;
-    margin: 1vmin;
-    padding: 0;
-}
-
-#imageToGuessFromWrapper {
-    background: var(--canvas-background);
-    margin-top: 6vmin;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 75vw;
-    width: 75vh;
-    max-height: 70vh;
-    height: 70vw;
-}
-
-#imageToGuessFrom {
-    width: 100%;
-    height: 100%;
-}
-
-#guessedWordWrapper {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 73vmin;
-    width: 73vmin;
-    height: 8vh;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-}
-
-#wordGuessInput {
-    background: var(--canvas-background);
-    font-family: overlock, serif;
-    font-size: 5vmin;
-    margin: 1vmin;
-    border-radius: 3vmin;
-    border-color: black;
-    padding: 1vmin;
-    width: 100%;
-    height: 100%;
-}
-
-#doneButtonForGuessPage {
-    background: var(--go-color);
-    height: auto;
-    width: auto;
-}
-
-#playersTelestrationDisplayPage {
+/*telestrationDisplaySection*/
+#telestrationDisplaySection {
     width: 100%;
     height: 100%;
     display: flex;
@@ -196,10 +196,12 @@ html, body {
     width: 100%;
 }
 
+
+/*ratingSection*/
 #ratingWrapper {
     text-align: center;
     width: 100%;
-    height: 10vh;
+    height: 20%;
 }
 
 .ratingStar {
@@ -217,17 +219,28 @@ html, body {
     margin: 2.5vmin;
 }
 
-#doneButtonForTelestationPageWrapper {
-    text-align: center;
+
+/*doneButtonSection*/
+#doneButtonSection{
     width: 100%;
-    height: 8vh;
-    margin: 2vh 0;
+    text-align: center;
+    margin: 0;
 }
 
-#doneButtonForTelestraionPage {
+.doneButtonWrapper{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 1vmin 0 1vmin 0;
+}
+
+.doneButton {
     background: var(--go-color);
 }
 
+
+/*loadingPage*/
 #loadingPage{
     display: none;
     width: 100vw;
@@ -238,11 +251,13 @@ html, body {
 #loader {
     display: block;
     position: absolute;
-    left: 43%;
-    top: 43%;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     width: 300px;
     height: 300px;
-    margin: -75px 0 0 -75px;
     border-radius: 50%;
     border: 8px solid transparent;
     border-top-color: rebeccapurple;

@@ -1,15 +1,9 @@
-:root {
-    --black: #262626;
-    --aqua: #BFDBF7;
-    --white: #FFF;
-}
-
 html,
 body {
     margin-left: 0.5%;
     margin-top: 1%;
     font-family: 'Roboto', sans-serif;
-    background: var(--white);
+    background: var(--page-background);
     touch-action: manipulation !important;
 }
 
@@ -28,28 +22,30 @@ div {
 }
 
 .title {
-    color: var(--black);
+    color: var(--default-text);
     text-align: center;
     font-size: 12vmin;
 }
 
 .input {
     width: 75vw;
-    border-color: var(--black);
+    background: var(--canvas-background);
+    border: 2px solid var(--default-text);
     border-radius: 2vmin;
     padding-top: 2%;
     padding-bottom: 2%;
     font-size: 8vmin;
     text-align: center;
     margin-bottom: 10vh;
+    color: var(--default-text);
 }
 
 .submit {
     padding: 2%;
     border: 0;
     border-radius: 2vmin;
-    background: var(--aqua);
-    color: var(--black);
+    background: var(--canvas-background);
+    color: var(--default-text);
     font-size: 10vmin;
     text-align: center;
 }
