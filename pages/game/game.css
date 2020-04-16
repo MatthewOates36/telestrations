@@ -219,6 +219,10 @@ html, body {
     margin: 2.5vmin;
 }
 
+.ratingStar:active {
+    filter: brightness(100%);
+}
+
 
 /*doneButtonSection*/
 #doneButtonSection{

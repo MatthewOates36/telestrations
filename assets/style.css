@@ -13,3 +13,7 @@
     -ms-user-select: none;
     user-select: none;
 }
+
+button:active {
+    filter: brightness(85%);
+}
