@@ -25,9 +25,9 @@ pauseGameButton.addEventListener('click', () => {
     socket.emit('pause-game')
 })
 
-const nextQuestionButton = document.getElementById('next-question-btn')
+const nextQuestionButton = document.getElementById('next-btn')
 nextQuestionButton.addEventListener('click', () => {
-    socket.emit('next-question')
+    socket.emit('next')
 })
 
 const resetGameButton = document.getElementById('reset-game-btn')

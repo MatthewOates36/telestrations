@@ -3,21 +3,34 @@ html, body {
     position: fixed;
     margin: 0;
     background: var(--page-background);
-    font-size: 1.5vh;
+    font-size: 1.5vmin;
     width: 100%;
     height: 100%;
 }
 
 .stateButton {
+    display: block;
     width: auto;
     height: auto;
     font-size: 2em;
     border: 0;
-    border-radius: 0.5em;
+    margin: 0;
     padding: 0.5em;
     background: var(--state-button-color);
+    color: var(--default-text);
 }
 
+.leftButton {
+    border-radius: 1rem 0 0 1rem;
+}
+
+.rightButton {
+    border-radius: 0 1rem 1rem 0;
+}
+
+.roundedButton {
+    border-radius: 1rem;
+}
 
 /*wordGuessingInstructionsSection*/
 #guessingWordInstructions {
@@ -44,6 +57,9 @@ html, body {
     max-height: 70vh;
     height: 70vw;
     text-align: center;
+    border-radius: 1rem;
+    border: 1px solid black;
+    overflow: hidden;
 }
 
 #imageToGuessFrom {
@@ -55,7 +71,8 @@ html, body {
 /*guessedWordSection*/
 #guessedWordSection {
     margin: 1vh auto;
-    width: 75vmin;
+    max-width: 75vw;
+    width: 75vh;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -67,8 +84,10 @@ html, body {
     font-family: overlock, serif;
     font-size: 5vmin;
     text-align: center;
-    border-radius: 3vmin;
+    border-radius: 1rem;
     border: 1px solid black;
+    margin: 0;
+    padding: 0.25em 0 0.25em 0;
     width: 100%;
     height: 100%;
 }
@@ -107,6 +126,9 @@ html, body {
     width: 75vh;
     max-height: 70vh;
     height: 70vw;
+    overflow: hidden;
+    border-radius: 1rem;
+    border: 1px solid black;
 }
 
 #canvas {
@@ -115,8 +137,11 @@ html, body {
 }
 
 #controlPanel {
-    text-align: center;
     padding: 2.5vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 #clearButton {
@@ -207,9 +232,9 @@ html, body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin: 1vmin;
-
+    margin: 1vmin 0 1vmin 0;
 }
+
 .doneButton {
     background: var(--go-color);
 }

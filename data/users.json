@@ -1,47 +1,26 @@
 {
-  "::1xecx0s6pn9m": {
-    "id": "::1xecx0s6pn9m",
-    "name": "sdf",
-    "connected": false
+  "::ffff:172.20.10.5gk4qxd50jtt": {
+    "id": "::ffff:172.20.10.5gk4qxd50jtt",
+    "name": "Sid",
+    "connected": false,
+    "socket": "/game#sReMbzsXAdmeog0qAAAR"
   },
-  "::ffff:10.19.12.170yh8xla1qczs": {
-    "id": "::ffff:10.19.12.170yh8xla1qczs",
-    "name": "Jasey",
-    "connected": false
-  },
-  "::ffff:172.20.10.2fdapijxh5xp": {
-    "id": "::ffff:172.20.10.2fdapijxh5xp",
-    "name": "kl",
-    "connected": false
-  },
-  "::ffff:127.0.0.1e05wesyg78s": {
-    "id": "::ffff:127.0.0.1e05wesyg78s",
-    "name": "hjb",
-    "connected": false
-  },
-  "::ffff:10.19.12.17098vmwqy3zfg": {
-    "id": "::ffff:10.19.12.17098vmwqy3zfg",
-    "name": "Matthew",
-    "connected": false
-  },
-  "::ffff:10.19.12.170gsjfm87naok": {
-    "id": "::ffff:10.19.12.170gsjfm87naok",
-    "name": "Mat",
-    "connected": false
+  "::ffff:172.20.10.1hxc2u5b23cn": {
+    "id": "::ffff:172.20.10.1hxc2u5b23cn",
+    "name": "Sid",
+    "connected": false,
+    "socket": "/game#9V1ySKcHxWlac9lmAAAG"
   },
   "::ffff:127.0.0.1drk36djc4l4": {
     "id": "::ffff:127.0.0.1drk36djc4l4",
     "name": "Matthew",
-    "connected": true
+    "connected": true,
+    "socket": "/game#g5GdhRtL5OSDdRPZAAAB"
   },
-  "::ffff:10.19.12.1726d1npir9xeb": {
-    "id": "::ffff:10.19.12.1726d1npir9xeb",
-    "name": "jgf",
-    "connected": true
-  },
-  "::ffff:127.0.0.1pefzwhi5s9": {
-    "id": "::ffff:127.0.0.1pefzwhi5s9",
+  "::ffff:172.20.10.11xatc4dyrzj": {
+    "id": "::ffff:172.20.10.11xatc4dyrzj",
     "name": "Jasey",
-    "connected": false
+    "connected": false,
+    "socket": "/game#mxjjau3cVHzqTegOAAAQ"
   }
 }

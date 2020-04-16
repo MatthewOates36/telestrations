@@ -37,13 +37,87 @@ class UserHandler {
     }
 }
 
+class UserTracker {
+    constructor(requiredCompleted = 1) {
+        this.requiredCompleted = requiredCompleted
+        this.users = {}
+        this.pastOffsets = [0]
+        this.cycleData = {}
+    }
+
+    isComplete() {
+        let userIds = Object.keys(this.users)
+        for(let user in userIds) {
+            if (this.users[userIds[user]].completed < this.requiredCompleted) {
+                return false
+            }
+        }
+
+        return true
+    }
+
+    setUsers(users) {
+        this.users = {}
+        this.pastOffsets = [0]
+        this.cycleData = {}
+        for(let user of users) {
+            this.users[user] = {participated: 0, completed: 0}
+        }
+    }
+
+    getUsers() {
+        return Object.keys(this.users)
+    }
+
+    getCurrentCycle() {
+        return this.cycleData
+    }
+
+    getNextCycle() {
+        let offset = this.randomOffset()
+        this.pastOffsets.push(offset)
+        this.cycleData = {}
+        let userIds = Object.keys(this.users)
+        for(let user in userIds) {
+            if(this.users[userIds[user]].completed < this.requiredCompleted) {
+                this.cycleData[userIds[(parseInt(user) + offset) % userIds.length]] = userIds[user]
+            }
+        }
+        return this.cycleData
+    }
+
+    setUsersCompletedThisCycle(users) {
+        for(let user of users) {
+            this.users[user].participated++
+            this.users[this.cycleData[user]].completed++
+        }
+    }
+
+    randomOffset() {
+        let num;
+        let counter = 0;
+        do {
+            counter++
+            if (counter > 1000) {
+                this.pastOffsets = []
+            }
+            num = Math.floor(Math.random() * Object.keys(this.users).length)
+        } while (this.pastOffsets.includes(num))
+        return num
+    }
+}
+
 class Users {
 
     constructor(data) {
         if (typeof data === 'object') {
             this.data = data
         } else {
-            this.data = JSON.parse(data)
+            try {
+                this.data = JSON.parse(data)
+            } catch (e) {
+                this.data = {}
+            }
         }
     }
 
@@ -80,12 +154,28 @@ class Users {
 
     setUserProperty(id, property, value) {
         let user = this.getUser(id)
+        if(user === undefined) {
+            console.log('User ' + id + " doesn't exist")
+            return
+        }
         user[property] = value
         this.getUser(user)
     }
 
     getUsers() {
         return this.data
+    }
+
+    getConnectedUsers() {
+        let connectedUsers = {}
+
+        for(let id of Object.keys(this.getUsers())) {
+            if(this.getUserProperty(id, 'connected')) {
+                connectedUsers[id] = this.getUser(id)
+            }
+        }
+
+        return connectedUsers
     }
 
     getUser(id) {
@@ -111,5 +201,6 @@ class Users {
 
 module.exports = {
     UserHandler,
+    UserTracker,
     Users
 }

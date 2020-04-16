@@ -52,14 +52,18 @@ class Telestrations {
     }
 
     getTelestration(id) {
-        if(this.data[id] === undefined) {
+        if(this.getTelestrations()[id] === undefined) {
             return undefined
         }
-        return this.data[id]
+        return this.getTelestrations()[id]
     }
 
     setTelestration(id, telestration) {
         this.data[id] = telestration
+    }
+
+    getTelestrations() {
+        return this.data
     }
 
     clearTelestrations() {
@@ -98,12 +102,42 @@ class Telestration {
         this.data.currentTelestrationState = TelestrationState.increment(this.data.currentTelestrationState)
     }
 
+    getCurrentSection() {
+        return this.getSection(this.data.telestration.length - 1)
+    }
+
+    getSection(index) {
+        return this.data.telestration[index]
+    }
+
+    getSectionFromId(id) {
+        for(let section of this.data.telestration) {
+            if(section.id === id) {
+                return section
+            }
+        }
+
+        return undefined
+    }
+
     getNextTelestrationSectionType() {
         return TelestrationState.sectionType(this.getCurrentTelestrationState())
     }
 
     getCurrentTelestrationState() {
         return this.data.currentTelestrationState
+    }
+
+    getAllData() {
+        let data = {}
+        data.word1 = this.getSection(0).data.word
+        data.image1 = this.getSection(0).data.image
+        data.word2 = this.getSection(1).data.word
+        data.image2 = this.getSection(2).data.image
+        data.word3 = this.getSection(3).data.word
+        data.image3 = this.getSection(4).data.image
+        data.word4 = this.getSection(5).data.word
+        return data
     }
 
     toJSON() {
