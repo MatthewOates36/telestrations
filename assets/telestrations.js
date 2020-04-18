@@ -7,7 +7,7 @@ class TelestrationsHandler {
         this.options = options
     }
 
-    getTelestraions(callback) {
+    getTelestrations(callback) {
         fs.readFile(this.file, this.options, (err, data) => {
             if (err) {
                 throw err
@@ -24,6 +24,11 @@ class TelestrationsHandler {
     setTelestrations(users, callback = () => {
     }) {
         if (callback !== undefined) {
+            try {
+                JSON.parse(users.toPrettyString())
+            } catch (e) {
+                console.log(users.toPrettyString())
+            }
             fs.writeFile(this.file, users.toPrettyString(), this.options, callback)
         }
     }
@@ -66,6 +71,26 @@ class Telestrations {
         return this.data
     }
 
+    getBestTelestrations() {
+        let telestrationIDs = Object.keys(this.data)
+        telestrationIDs.sort((a, b) => {
+            let aRating = this.getTelestration(a).getRating()
+            let bRating = this.getTelestration(b).getRating()
+            if(aRating > bRating) {
+                return -1
+            }
+            if(aRating < bRating) {
+                return 1
+            }
+            if(Math.random() < 0.5) {
+                return -1
+            }
+            return 1
+        })
+        telestrationIDs.splice(3)
+        return telestrationIDs
+    }
+
     clearTelestrations() {
         this.data = {}
     }
@@ -94,6 +119,7 @@ class Telestration {
             this.data = {}
             this.data.telestration = []
             this.data.currentTelestrationState = TelestrationState.INITIAL
+            this.data.rating = -1
         }
     }
 
@@ -126,6 +152,14 @@ class Telestration {
 
     getCurrentTelestrationState() {
         return this.data.currentTelestrationState
+    }
+
+    getRating() {
+        return this.data.rating
+    }
+
+    setRating(rating) {
+        this.data.rating = rating
     }
 
     getAllData() {

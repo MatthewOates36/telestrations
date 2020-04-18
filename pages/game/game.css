@@ -168,12 +168,18 @@ html, body {
     max-width: 75vw;
     width: 75vh;
     text-align: center;
-    font-family: overlock, serif;
-    font-size: 5vmin;
 }
 
 .telestrationsWord {
     margin: 0;
+    font-family: overlock, serif;
+    font-size: 5rem;
+}
+
+.telestrationsName {
+    margin: 0 0 1em 0;
+    font-family: overlock, serif;
+    font-size: 2.5rem;
 }
 
 .telestrationsImageWrapper {
@@ -194,6 +200,8 @@ html, body {
     margin: 0;
     height: 100%;
     width: 100%;
+    border-radius: 1rem;
+    overflow: hidden;
 }
 
 

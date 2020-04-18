@@ -1,13 +1,15 @@
 const socket = io('/game')
 const canvas = $('#canvas')
 const scribbleArea = new ScribbleArea(canvas)
+let rating = 0
 
 const Pages = {
     LOADING: 0,
     INITIAL: -1,
     WORD: 2,
     DRAWING: 3,
-    DISPLAY: 4
+    RATING: 4,
+    DISPLAY: 5
 }
 
 let drawMode = DrawMode.DRAW
@@ -88,7 +90,7 @@ socket.on('loading', () => {
     showLoadingPage()
 })
 
-socket.on('enter-initial', () => {
+socket.on('initial', () => {
     showInitialPage()
 })
 
@@ -115,24 +117,47 @@ socket.on('rate', message => {
     $('#telestrationWord3').text(data.word3)
     $('#telestrationImage3').attr("src", data.image3);
     $('#telestrationWord4').text(data.word4)
+    showPlayersTelestrationRatingPage()
+})
+
+socket.on('display', message => {
+    let data = JSON.parse(message)
+    $('#telestrationWord1').text(data.word1)
+    $('#telestrationImage1').attr("src", data.image1);
+    $('#telestrationWord2').text(data.word2)
+    $('#telestrationImage2').attr("src", data.image2);
+    $('#telestrationWord3').text(data.word3)
+    $('#telestrationImage3').attr("src", data.image3);
+    $('#telestrationWord4').text(data.word4)
     showPlayersTelestrationDisplayPage()
 })
 
 function continueToNextPage() {
-    if (currentPage === Pages.INITIAL) {
-        showLoadingPage()
-        socket.emit('initial', JSON.stringify({word: guessedWordInputBox.value, image: scribbleArea.getImage()}))
-    } else if (currentPage === Pages.WORD) {
-        showLoadingPage()
-        socket.emit('word', JSON.stringify({word: guessedWordInputBox.value}))
-    } else if (currentPage === Pages.DRAWING) {
-        showLoadingPage()
-        socket.emit('image', JSON.stringify({image: scribbleArea.getImage()}))
+    switch(currentPage) {
+        case Pages.INITIAL:
+            showLoadingPage()
+            socket.emit('initial', JSON.stringify({word: guessedWordInputBox.value, image: scribbleArea.getImage()}))
+            break
+        case Pages.WORD:
+            showLoadingPage()
+            socket.emit('word', JSON.stringify({word: guessedWordInputBox.value}))
+            break
+        case Pages.DRAWING:
+            showLoadingPage()
+            socket.emit('image', JSON.stringify({image: scribbleArea.getImage()}))
+            break
+        case Pages.RATING:
+            if(rating > 0) {
+                showLoadingPage()
+                socket.emit('rate', JSON.stringify({rating: rating}))
+            }
+            break
     }
 }
 
 function showInitialPage() {
     currentPage = Pages.INITIAL
+    guessedWordInputBox.value = ''
     imageToGuessFromSection.style.display = 'none'
     guessedWordSection.style.display = 'block'
     wordToBeDrawnSection.style.display = 'none'
@@ -142,7 +167,7 @@ function showInitialPage() {
     loadingPage.style.display = 'none'
     wordGuessPageDoneButton.style.display = 'none'
     wordGuessInput.placeholder = 'Choose a word to draw'
-
+    scribbleArea.clear()
 }
 
 function showDrawingPage() {
@@ -170,6 +195,18 @@ function showWordGuessingPage() {
     wordGuessPageDoneButton.style.display = 'block'
 }
 
+function showPlayersTelestrationRatingPage() {
+    currentPage = Pages.RATING
+    setRating(0)
+    imageToGuessFromSection.style.display = 'none'
+    guessedWordSection.style.display = 'none'
+    wordToBeDrawnSection.style.display = 'none'
+    canvasSection.style.display = 'none'
+    telestrationDisplaySection.style.display = 'block'
+    ratingSection.style.display = 'block'
+    loadingPage.style.display = 'none'
+}
+
 function showPlayersTelestrationDisplayPage() {
     currentPage = Pages.DISPLAY
     imageToGuessFromSection.style.display = 'none'
@@ -177,7 +214,7 @@ function showPlayersTelestrationDisplayPage() {
     wordToBeDrawnSection.style.display = 'none'
     canvasSection.style.display = 'none'
     telestrationDisplaySection.style.display = 'block'
-    ratingSection.style.display = 'block'
+    ratingSection.style.display = 'none'
     loadingPage.style.display = 'none'
 }
 
@@ -192,8 +229,14 @@ function showLoadingPage() {
     loadingPage.style.display = 'block'
 }
 
-function setRating(rating) {
-    switch (rating) {
+function setRating(ratingStar) {
+    rating = ratingStar
+    switch (ratingStar) {
+        case 0:
+            ratingStar1.style.backgroundImage = 'url("/assets/images/empty-star.png")'
+            ratingStar2.style.backgroundImage = 'url("/assets/images/empty-star.png")'
+            ratingStar3.style.backgroundImage = 'url("/assets/images/empty-star.png")'
+            break
         case 1:
             ratingStar1.style.backgroundImage = 'url("/assets/images/star.png")'
             ratingStar2.style.backgroundImage = 'url("/assets/images/empty-star.png")'

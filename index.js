@@ -157,7 +157,42 @@ gameIO.on('connection', socket => {
         users.setUserProperty(id, 'socket', socket.id)
 
         socket.emit('name', users.getUserProperty(id, 'name'))
-        socket.emit('loading')
+
+        switch (currentGameMode) {
+            case GameMode.INITIAL:
+                if(!usersInRound.includes(id)) {
+                    socket.emit('initial')
+                }
+                break
+            case GameMode.TELESTRATING:
+                let cycle = userTracker.getCurrentCycle()
+
+                if(Object.keys(cycle).includes(id)) {
+                    telestrationsHandler.getTelestrations(telestrations => {
+                        let currentSection = telestrations.getTelestration(cycle[id]).getCurrentSection()
+                        if(currentSection.type === TelestrationSectionType.WORD) {
+                            socket.emit('word', JSON.stringify({word: currentSection.data.word}))
+                        } else if(currentSection.type === TelestrationSectionType.INITIAL || currentSection.type === TelestrationSectionType.IMAGE) {
+                            socket.emit('image', JSON.stringify({image: currentSection.data.image}))
+                        }
+                    })
+                } else {
+                    socket.emit('loading')
+                }
+                break
+            case GameMode.RATING:
+                if(workingUsers.includes(id)) {
+                    telestrationsHandler.getTelestrations(telestrations => {
+                        if (telestrations.includes(id)) {
+                            socket.emit('rate', JSON.stringify(telestrations.getTelestration(id).getAllData()))
+                        }
+                    })
+                }
+                break
+            default:
+                socket.emit('loading')
+                break
+        }
 
         return users
     })
@@ -169,7 +204,7 @@ gameIO.on('connection', socket => {
             usersInRound.push(id)
         }
 
-        telestrationsHandler.getTelestraions(telestrations => {
+        telestrationsHandler.getTelestrations(telestrations => {
 
             telestrations.createTelestration(id)
             telestrations.getTelestration(id).addSection(id, TelestrationSectionType.INITIAL, data)
@@ -180,7 +215,7 @@ gameIO.on('connection', socket => {
 
     socket.on('image', message => {
         let data = JSON.parse(message)
-        telestrationsHandler.getTelestraions(telestrations => {
+        telestrationsHandler.getTelestrations(telestrations => {
             telestrations.getTelestration(userTracker.getCurrentCycle()[id]).addSection(id, TelestrationSectionType.IMAGE, data)
             userFinished(id)
             return telestrations
@@ -189,8 +224,17 @@ gameIO.on('connection', socket => {
 
     socket.on('word', message => {
         let data = JSON.parse(message)
-        telestrationsHandler.getTelestraions(telestrations => {
+        telestrationsHandler.getTelestrations(telestrations => {
             telestrations.getTelestration(userTracker.getCurrentCycle()[id]).addSection(id, TelestrationSectionType.WORD, data)
+            userFinished(id)
+            return telestrations
+        })
+    })
+
+    socket.on('rate', message => {
+        let data = JSON.parse(message)
+        telestrationsHandler.getTelestrations(telestrations => {
+            telestrations.getTelestration(id).setRating(data.rating)
             userFinished(id)
             return telestrations
         })
@@ -212,7 +256,11 @@ function sendPlayerList() {
 
         for(let user of Object.keys(users.getUsers())) {
             if(users.getUserProperty(user, 'connected')) {
-                players[users.getUserProperty(user, 'name')] = true
+                if(currentGameMode === GameMode.INITIAL) {
+                    players[users.getUserProperty(user, 'name')] = usersInRound.includes(user)
+                } else {
+                    players[users.getUserProperty(user, 'name')] = !workingUsers.includes(user)
+                }
             }
         }
 
@@ -254,14 +302,17 @@ setInterval(() => {
 
     switch (currentGameMode) {
         case GameMode.PAUSED:
+            if(lastGameMode !== GameMode.PAUSED) {
+                gameIO.emit('loading')
+            }
             break
         case GameMode.INITIAL:
             if(lastGameMode !== GameMode.INITIAL) {
                 usersInRound = []
                 workingUsers = []
-                telestrationsHandler.getTelestraions(telestrations => {
+                telestrationsHandler.getTelestrations(telestrations => {
                     telestrations.clearTelestrations()
-                    gameIO.emit('enter-initial')
+                    gameIO.emit('initial')
                     return telestrations
                 })
             } else {
@@ -271,28 +322,15 @@ setInterval(() => {
             }
             break
         case GameMode.TELESTRATING:
-            if(lastGameMode === GameMode.INITIAL) {
+            if(allUsersDone() || lastGameMode !== GameMode.TELESTRATING) {
+                if(lastGameMode === GameMode.INITIAL) {
+                    userTracker.setUsers(usersInRound)
+                } else {
+                    updateCompletedUsers()
+                }
                 workingUsers = [...usersInRound]
 
-                userTracker.setUsers(usersInRound)
-                telestrationsHandler.getTelestraions(telestrationsHandler => {
-                    userHandler.getUsers(users => {
-                        let cycle = userTracker.getNextCycle()
-                        for (let user of Object.keys(cycle)) {
-                            let socket = gameIO.sockets[users.getUserProperty(user, 'socket')]
-                            if (socket !== undefined) {
-                                socket.emit('image', JSON.stringify({image: telestrationsHandler.getTelestration(cycle[user]).getCurrentSection().data.image}))
-                            }
-                        }
-                    })
-                })
-            } else if(userTracker.isComplete()) {
-                nextGameMode = GameMode.RATING
-            } else if(allUsersDone()) {
-                updateCompletedUsers()
-                workingUsers = [...usersInRound]
-
-                telestrationsHandler.getTelestraions(telestrations => {
+                telestrationsHandler.getTelestrations(telestrations => {
                     userHandler.getUsers(users => {
                         let cycle = userTracker.getNextCycle()
 
@@ -304,19 +342,21 @@ setInterval(() => {
                             }
                         }
 
-                        for (let user of Object.keys(cycle)) {
+                        for (let user of usersInCycle) {
                             let socket = gameIO.sockets[users.getUserProperty(user, 'socket')]
                             if (socket !== undefined) {
                                 let currentSection = telestrations.getTelestration(cycle[user]).getCurrentSection()
                                 if(currentSection.type === TelestrationSectionType.WORD) {
                                     socket.emit('word', JSON.stringify({word: currentSection.data.word}))
-                                } else if(currentSection.type === TelestrationSectionType.IMAGE) {
+                                } else if(currentSection.type === TelestrationSectionType.INITIAL || currentSection.type === TelestrationSectionType.IMAGE) {
                                     socket.emit('image', JSON.stringify({image: currentSection.data.image}))
                                 }
                             }
                         }
                     })
                 })
+            } else if(userTracker.isComplete()) {
+                nextGameMode = GameMode.RATING
             }
             break
         case GameMode.RATING:
@@ -324,7 +364,7 @@ setInterval(() => {
 
                 workingUsers = [...usersInRound]
 
-                telestrationsHandler.getTelestraions(telestrations => {
+                telestrationsHandler.getTelestrations(telestrations => {
                     userHandler.getUsers(users => {
                         for (let telestrationId of Object.keys(telestrations.getTelestrations())) {
                             let socket = gameIO.sockets[users.getUserProperty(telestrationId, 'socket')]
@@ -334,9 +374,27 @@ setInterval(() => {
                         }
                     })
                 })
+            } else if(allUsersDone()) {
+                nextGameMode = GameMode.SHOWING_BEST
             }
             break
         case GameMode.SHOWING_BEST:
+            if(lastGameMode !== GameMode.SHOWING_BEST) {
+                telestrationsHandler.getTelestrations(telestrations => {
+                    let best = telestrations.getBestTelestrations()
+                    gameIO.emit('display', JSON.stringify(telestrations.getTelestration(best[2]).getAllData()))
+                    setTimeout(() => {
+                        gameIO.emit('display', JSON.stringify(telestrations.getTelestration(best[1]).getAllData()))
+                        setTimeout(() => {
+                            gameIO.emit('display', JSON.stringify(telestrations.getTelestration(best[0]).getAllData()))
+                            setTimeout(() => {
+                                gameIO.emit('loading')
+                                currentGameMode = GameMode.INITIAL
+                            }, 10000)
+                        }, 10000)
+                    }, 10000)
+                })
+            }
             break
     }
 
