@@ -87,7 +87,9 @@ class Telestrations {
             }
             return 1
         })
-        telestrationIDs.splice(3)
+        if(telestrationIDs.length > 5) {
+            telestrationIDs.splice(5)
+        }
         return telestrationIDs
     }
 
@@ -171,6 +173,13 @@ class Telestration {
         data.word3 = this.getSection(3).data.word
         data.image3 = this.getSection(4).data.image
         data.word4 = this.getSection(5).data.word
+        /*data.id1 = this.getSection(0).id
+        data.id2 = this.getSection(0).id
+        data.id3 = this.getSection(1).id
+        data.id4 = this.getSection(2).id
+        data.id5 = this.getSection(3).id
+        data.id6 = this.getSection(4).id
+        data.id7 = this.getSection(5).id*/
         return data
     }
 
@@ -212,7 +221,6 @@ const TelestrationState = {
         return currentState === TelestrationState.IMAGE_2 || currentState === TelestrationState.IMAGE_3
     },
     sectionType: (currentState) => {
-        console.log(currentState)
         if(TelestrationState.isDone(currentState)) {
             return TelestrationSectionType.NONE
         }

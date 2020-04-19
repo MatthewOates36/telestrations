@@ -40,6 +40,12 @@ class ScribbleArea {
         }
     }
 
+    reset() {
+        this.clearCanvas()
+        this.clearState()
+        this.saveState()
+    }
+
     clear() {
         this.clearCanvas()
         this.resetState()
@@ -49,6 +55,21 @@ class ScribbleArea {
     clearCanvas() {
         this.context.clearRect(0, 0, this.canvas.width(), this.canvas.height())
         this.context.stroke()
+    }
+
+    hasDrawing() {
+        let pixels = this.context.getImageData(0, 0, this.canvas.width(), this.canvas.height()).data;
+
+        let a;
+        for(let i = 0; i+3 < pixels.length; i+=4) {
+            a = pixels[i+3];
+
+            if(a > 100) {
+                return true
+            }
+        }
+
+        return false
     }
 
     setDrawMode(drawMode) {
@@ -148,6 +169,10 @@ class ScribbleArea {
 
         this.context.lineTo(position.x * widthScalar, position.y * heightScalar)
         this.context.stroke()
+    }
+
+    clearState() {
+        this.previousCanvasStates.splice(0)
     }
 
     resetState() {

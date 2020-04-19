@@ -32,6 +32,29 @@ html, body {
     border-radius: 1rem;
 }
 
+
+/*timer*/
+.timerDisplay {
+    position: relative;
+    top: 0;
+    width: 100vw;
+    height: 15px;
+    text-align: right;
+    background: var(--page-background);
+    display: inline-block;
+}
+
+.timerBar {
+    background: red;
+    animation-name: timerWidth;
+    animation-timing-function: linear;
+    animation-duration: 90s;
+    height: 15px;
+    float: left;
+    display: none;
+}
+
+
 /*wordGuessingInstructionsSection*/
 #guessingWordInstructions {
     width: 100%;
@@ -60,6 +83,7 @@ html, body {
     border-radius: 1rem;
     border: 1px solid black;
     overflow: hidden;
+    display: none;
 }
 
 #imageToGuessFrom {
@@ -74,7 +98,7 @@ html, body {
     max-width: 75vw;
     width: 75vh;
     align-items: center;
-    display: flex;
+    display: none;
     flex-direction: column;
     border: 0;
 }
@@ -94,6 +118,10 @@ html, body {
 
 
 /*wordToBeDrawnSection*/
+#wordToBeDrawnSection {
+    display: none;
+}
+
 #wordToBeDrawnWrapper {
     width: 100vw;
     height: 6vmin;
@@ -111,6 +139,10 @@ html, body {
 
 
 /*canvasSection*/
+#canvasSection {
+    display: none;
+}
+
 #canvasHolder {
     width: 100vw;
     text-align: center;
@@ -153,12 +185,12 @@ html, body {
 #telestrationDisplaySection {
     width: 100%;
     height: 100%;
-    display: flex;
+    display: none;
     align-items: center;
     flex-direction: column;
     overflow: auto;
+    padding-bottom: 5vh;
     position: relative;
-
 }
 
 .telestrationsWordWrapper {
@@ -254,10 +286,13 @@ html, body {
 
 /*loadingPage*/
 #loadingPage{
-    display: none;
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
     width: 100vw;
     height: 100vh;
-    background: var(--white);
+    background: var(--page-background);
 }
 
 #loader {
@@ -302,11 +337,69 @@ html, body {
     animation: spin 2s linear infinite;
 }
 
+
+/*animations*/
 @keyframes spin {
     0% {
         transform: rotate(0deg);
     }
     100% {
         transform: rotate(360deg);
+    }
+}
+
+@keyframes timerWidth {
+    0% {
+        width: 0;
+        background: lime;
+    }
+    50% {
+        background: lime;
+    }
+    60% {
+        background: orange;
+    }
+    70% {
+        background: orange;
+    }
+    80% {
+        background: red;
+    }
+    81% {
+        background: red;
+    }
+    81.75% {
+        background: yellow;
+    }
+    82.5% {
+        background: red;
+    }
+    83.25% {
+        background: yellow;
+    }
+    84% {
+        background: red;
+    }
+    84.75% {
+        background: yellow;
+    }
+    85.5% {
+        background: red;
+    }
+    86.25% {
+        background: yellow;
+    }
+    87% {
+        background: red;
+    }
+    87.75% {
+        background: yellow;
+    }
+    88.5% {
+        background: red;
+    }
+    100% {
+        width: 100vw;
+        background: red;
     }
 }

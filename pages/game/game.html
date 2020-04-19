@@ -9,11 +9,15 @@
     <link rel="stylesheet" href="game.css">
 </head>
 <body class="unselectable">
-<!----------------------->
-<div id="imageToGuessFromSection">
-    <img src="../../assets/images/initial-image.png" id="imageToGuessFrom">
+
+<div class="timerDisplay" id="timer">
+    <div class="timerBar" id="timerBar"></div>
 </div>
-<!----------------------->
+
+<div id="imageToGuessFromSection">
+    <img id="imageToGuessFrom">
+</div>
+
 <div id="guessedWordSection">
     <input id="wordGuessInput" placeholder="Choose a word to draw">
     <div class="doneButtonWrapper">
@@ -21,13 +25,13 @@
         </div>
 </div>
 </div>
-<!----------------------->
+
 <div id="wordToBeDrawnSection">
     <div id="wordToBeDrawnWrapper">
         <h2 id="wordToBeDrawn">None</h2>
     </div>
 </div>
-<!----------------------->
+
 <div id="canvasSection">
     <div id="canvasHolder">
         <div id="canvasWrapper">
@@ -42,7 +46,7 @@
         <button class="doneButton stateButton rightButton">Done</button>
     </div>
 </div>
-<!----------------------->
+
 <div id="telestrationDisplaySection">
     <div class="telestrationsWordWrapper">
         <h2 id="telestrationWord1" class="telestrationsWord"></h2>
@@ -97,7 +101,7 @@
         <button class="doneButton stateButton roundedButton">Done</button>
     </div>
 </div>
-<!----------------------->
+
 <div id="loadingPage">
     <div id="loader"></div>
 </div>
@@ -105,6 +109,8 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="/assets/jquery.min.js"></script>
 <script src="/assets/scribble-area.js"></script>
+<script src="/assets/event-handler.js"></script>
+<script src="/assets/timer.js"></script>
 <script src="game.js"></script>
 </body>
 </html>
