@@ -160,6 +160,7 @@ gameIO.on('connection', socket => {
             return
         }
 
+
         users.userConnected(id)
         users.setUserProperty(id, 'socket', socket.id)
 
