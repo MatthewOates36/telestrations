@@ -8,6 +8,18 @@ const path = require('path')
 const {UserHandler, UserTracker, Users} = require('./assets/users.js')
 const {TelestrationsHandler, Telestrations, Telestration, TelestrationState, TelestrationSectionType} = require('./assets/telestrations.js')
 
+if(!fs.existsSync('data')) {
+   fs.mkdirSync('data')
+}
+
+if(!fs.existsSync('data/users.json')) {
+    fs.writeFileSync('data/users.json', '{}')
+}
+
+if(!fs.existsSync('data/gamedata.json')) {
+    fs.writeFileSync('data/gamedata.json', '{}')
+}
+
 const controllerIO = io.of('/controller')
 const loginIO = io.of('/login')
 const gameIO = io.of('/game')
@@ -159,7 +171,6 @@ gameIO.on('connection', socket => {
             socket.emit('redirect', JSON.stringify({location: ''}))
             return
         }
-
 
         users.userConnected(id)
         users.setUserProperty(id, 'socket', socket.id)
