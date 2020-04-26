@@ -125,8 +125,8 @@ class Telestration {
         }
     }
 
-    addSection(id, type, data) {
-        this.data.telestration.push({id: id, type: type, data: data})
+    addSection(id, name, type, data) {
+        this.data.telestration.push({id: id, name: name, type: type, data: data})
         this.data.currentTelestrationState = TelestrationState.increment(this.data.currentTelestrationState)
     }
 
@@ -173,13 +173,13 @@ class Telestration {
         data.word3 = this.getSection(3).data.word
         data.image3 = this.getSection(4).data.image
         data.word4 = this.getSection(5).data.word
-        /*data.id1 = this.getSection(0).id
-        data.id2 = this.getSection(0).id
-        data.id3 = this.getSection(1).id
-        data.id4 = this.getSection(2).id
-        data.id5 = this.getSection(3).id
-        data.id6 = this.getSection(4).id
-        data.id7 = this.getSection(5).id*/
+        data.name1 = this.getSection(0).name
+        data.name2 = this.getSection(0).name
+        data.name3 = this.getSection(1).name
+        data.name4 = this.getSection(2).name
+        data.name5 = this.getSection(3).name
+        data.name6 = this.getSection(4).name
+        data.name7 = this.getSection(5).name
         return data
     }
 

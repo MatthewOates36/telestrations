@@ -118,6 +118,13 @@ socket.on('rate', message => {
     $('#telestrationWord3').text(data.word3)
     $('#telestrationImage3').attr("src", data.image3);
     $('#telestrationWord4').text(data.word4)
+    $('#telestrationName1').text(data.name1)
+    $('#telestrationName2').text(data.name2)
+    $('#telestrationName3').text(data.name3)
+    $('#telestrationName4').text(data.name4)
+    $('#telestrationName5').text(data.name5)
+    $('#telestrationName6').text(data.name6)
+    $('#telestrationName7').text(data.name7)
     showPlayersTelestrationRatingPage()
 })
 
@@ -256,9 +263,11 @@ function showPlayersTelestrationRatingPage() {
     guessedWordSection.style.display = 'none'
     wordToBeDrawnSection.style.display = 'none'
     canvasSection.style.display = 'none'
-    telestrationDisplaySection.style.display = 'block'
+    telestrationDisplaySection.style.display = 'inline-block'
+    telestrationDisplaySection.scrollTo(0, 0)
     ratingSection.style.display = 'block'
     loadingPage.style.display = 'none'
+    wordGuessPageDoneButton.style.display = 'none'
 }
 
 function showPlayersTelestrationDisplayPage() {
@@ -267,9 +276,11 @@ function showPlayersTelestrationDisplayPage() {
     guessedWordSection.style.display = 'none'
     wordToBeDrawnSection.style.display = 'none'
     canvasSection.style.display = 'none'
-    telestrationDisplaySection.style.display = 'block'
+    telestrationDisplaySection.style.display = 'inline-block'
+    telestrationDisplaySection.scrollTo(0, 0)
     ratingSection.style.display = 'none'
     loadingPage.style.display = 'none'
+    wordGuessPageDoneButton.style.display = 'none'
 }
 
 function showLoadingPage() {

@@ -184,17 +184,17 @@ html, body {
 /*telestrationDisplaySection*/
 #telestrationDisplaySection {
     width: 100%;
-    height: 100%;
+    height: 93%;
     display: none;
     align-items: center;
     flex-direction: column;
-    overflow: auto;
+    overflow: scroll;
     padding-bottom: 5vh;
     position: relative;
 }
 
 .telestrationsWordWrapper {
-    margin-top: 2vmin;
+    margin-top: 4vmin;
     margin-left: auto;
     margin-right: auto;
     max-width: 75vw;
@@ -208,6 +208,15 @@ html, body {
     font-size: 5rem;
 }
 
+.telestrationsNameWrapper {
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 75vw;
+    width: 75vh;
+    text-align: center;
+}
+
 .telestrationsName {
     margin: 0 0 1em 0;
     font-family: overlock, serif;
@@ -215,7 +224,7 @@ html, body {
 }
 
 .telestrationsImageWrapper {
-    margin-top: 2vmin;
+    margin-top: 4vmin;
     margin-left: auto;
     margin-right: auto;
     max-width: 55vw;
@@ -276,7 +285,7 @@ html, body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin: 1vmin 0 1vmin 0;
+    margin: 1vmin 0 2vmin 0;
 }
 
 .doneButton {
