@@ -1,0 +1,43 @@
+:root {
+    --black: #262626;
+    --aqua: #BFDBF7;
+    --dark-aqua: #AFCBE7;
+    --white: #FFF;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+#container {
+    display: flex;
+    flex-wrap: wrap;
+    height: 95%;
+}
+
+#container > iframe {
+    flex-grow: 1;
+    min-height: 33%;
+    min-width: 33%;
+}
+
+#controls {
+    text-align: center;
+    height: 5%;
+    background-color: var(--aqua);
+}
+
+#controls > button {
+    height: 100%;
+    font-size: 2em;
+    border: none;
+    background-color: var(--aqua);
+    color: var(--black);
+    padding: 0.5em 0.25em;
+    margin: 0 1em;
+}
+
+#controls > button:hover {
+    background-color: var(--dark-aqua);
+}

@@ -8,17 +8,21 @@ class TelestrationsHandler {
     }
 
     getTelestrations(callback) {
-        fs.readFile(this.file, this.options, (err, data) => {
-            if (err) {
-                throw err
-            }
-            if (callback) {
+        if(callback) {
+            fs.readFile(this.file, this.options, (err, data) => {
+                if (err) {
+                    throw err
+                }
                 let newData = callback(new Telestrations(data))
                 if (newData !== undefined) {
                     this.setTelestrations(newData)
                 }
-            }
-        })
+            })
+        } else {
+            let data = fs.readFileSync(this.file, this.options)
+
+            return new Telestrations(data)
+        }
     }
 
     setTelestrations(users, callback = () => {

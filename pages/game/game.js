@@ -4,7 +4,7 @@ const scribbleArea = new ScribbleArea(canvas)
 const timerBar = $('#timerBar')
 const timer = new Timer(timerBar)
 let rating = 0
-
+​
 const Pages = {
     LOADING: 0,
     INITIAL: -1,
@@ -13,10 +13,10 @@ const Pages = {
     RATING: 4,
     DISPLAY: 5
 }
-
+​
 let drawMode = DrawMode.DRAW
 let currentPage = Pages.LOADING;
-
+​
 let imageToGuessFromSection = $('#imageToGuessFromSection')[0]
 let guessedWordSection = $('#guessedWordSection')[0]
 let canvasSection = $('#canvasSection')[0]
@@ -25,16 +25,16 @@ let wordToBeDrawnSection = $('#wordToBeDrawnSection')[0]
 let ratingSection = $('#ratingSection')[0]
 let wordGuessPageDoneButton = $('#wordGuessPageDoneButton')[0]
 let wordGuessInput = $('#wordGuessInput')[0]
-
+​
 let loadingPage = $('#loadingPage')[0]
 let imageToGuessFrom = $('#imageToGuessFrom')[0]
 let wordToBeDrawn = $('#wordToBeDrawn')[0]
 let ratingStar1 = $('#ratingStar1')[0]
 let ratingStar2 = $('#ratingStar2')[0]
 let ratingStar3 = $('#ratingStar3')[0]
-
+​
 showLoadingPage()
-
+​
 ratingStar1.addEventListener('click', () => {
     setRating(1)
 })
@@ -44,18 +44,18 @@ ratingStar2.addEventListener('click', () => {
 ratingStar3.addEventListener('click', () => {
     setRating(3)
 })
-
+​
 canvas[0].addEventListener('touchmove', e => {
     if (e.touches.length === 1) {
         e.preventDefault()
     }
 }, {passive: false});
-
+​
 $('#clearButton').on('click touchstart', (event) => {
     event.preventDefault()
     scribbleArea.clear()
 })
-
+​
 $('#eraseButton').on('click touchstart', (event) => {
     event.preventDefault()
     if (drawMode === DrawMode.DRAW) {
@@ -67,48 +67,48 @@ $('#eraseButton').on('click touchstart', (event) => {
     }
     scribbleArea.setDrawMode(drawMode)
 })
-
+​
 $('#undoButton').on('click touchstart', (event) => {
     event.preventDefault()
     scribbleArea.undo()
 })
-
+​
 $('#redoButton').on('click touchstart', (event) => {
     event.preventDefault()
     scribbleArea.redo()
 })
-
+​
 $('.doneButton').each((index, item) => {
     item.addEventListener('click', continueToNextPage)
 })
-
+​
 socket.on('redirect', message => {
     let data = JSON.parse(message)
     window.location.href = 'http://' + window.location.hostname + ':' + window.location.port + data.location
 })
-
+​
 socket.on('loading', () => {
     showLoadingPage()
 })
-
+​
 socket.on('initial', () => {
     showInitialPage()
 })
-
+​
 socket.on('image', message => {
     let data = JSON.parse(message)
     imageToGuessFrom.src = data.image
     wordGuessInput.value = ''
     showWordGuessingPage()
 })
-
+​
 socket.on('word', message => {
     let data = JSON.parse(message)
     wordToBeDrawn.innerText = 'Draw this: ' + data.word
     showDrawingPage()
     scribbleArea.reset()
 })
-
+​
 socket.on('rate', message => {
     let data = JSON.parse(message)
     $('#telestrationWord1').text(data.word1)
@@ -127,7 +127,7 @@ socket.on('rate', message => {
     $('#telestrationName7').text(data.name7)
     showPlayersTelestrationRatingPage()
 })
-
+​
 socket.on('display', message => {
     let data = JSON.parse(message)
     $('#telestrationWord1').text(data.word1)
@@ -146,12 +146,12 @@ socket.on('display', message => {
     $('#telestrationName7').text(data.name7)
     showPlayersTelestrationDisplayPage()
 })
-
+​
 socket.on('time', message => {
     let data = JSON.parse(message)
     timer.start(data.duration, data.offset)
 })
-
+​
 timer.on('end', () => {
     switch(currentPage) {
         case Pages.RATING:
@@ -167,7 +167,7 @@ timer.on('end', () => {
             break
     }
 })
-
+​
 function continueToNextPage() {
     switch(currentPage) {
         case Pages.INITIAL:
@@ -204,6 +204,7 @@ function continueToNextPage() {
         case Pages.RATING:
             if(rating < 1) {
                 alert('You must rate your telestration')
+                return
             }
             timer.stop()
             showLoadingPage()
@@ -215,7 +216,7 @@ function continueToNextPage() {
             break
     }
 }
-
+​
 function showInitialPage() {
     currentPage = Pages.INITIAL
     wordGuessInput.value = ''
@@ -230,7 +231,7 @@ function showInitialPage() {
     wordGuessInput.placeholder = 'Choose a word to draw'
     scribbleArea.reset()
 }
-
+​
 function showDrawingPage() {
     currentPage = Pages.DRAWING
     imageToGuessFromSection.style.display = 'none'
@@ -240,9 +241,9 @@ function showDrawingPage() {
     telestrationDisplaySection.style.display = 'none'
     ratingSection.style.display = 'none'
     loadingPage.style.display = 'none'
-
+​
 }
-
+​
 function showWordGuessingPage() {
     currentPage = Pages.WORD
     imageToGuessFromSection.style.display = 'block'
@@ -255,7 +256,7 @@ function showWordGuessingPage() {
     wordGuessInput.placeholder = 'Guess what this is'
     wordGuessPageDoneButton.style.display = 'block'
 }
-
+​
 function showPlayersTelestrationRatingPage() {
     currentPage = Pages.RATING
     setRating(0)
@@ -269,7 +270,7 @@ function showPlayersTelestrationRatingPage() {
     loadingPage.style.display = 'none'
     wordGuessPageDoneButton.style.display = 'none'
 }
-
+​
 function showPlayersTelestrationDisplayPage() {
     currentPage = Pages.DISPLAY
     imageToGuessFromSection.style.display = 'none'
@@ -282,7 +283,7 @@ function showPlayersTelestrationDisplayPage() {
     loadingPage.style.display = 'none'
     wordGuessPageDoneButton.style.display = 'none'
 }
-
+​
 function showLoadingPage() {
     currentPage = Pages.LOADING
     imageToGuessFromSection.style.display = 'none'
@@ -293,7 +294,7 @@ function showLoadingPage() {
     ratingSection.style.display = 'none'
     loadingPage.style.display = 'block'
 }
-
+​
 function setRating(ratingStar) {
     rating = ratingStar
     switch (ratingStar) {
